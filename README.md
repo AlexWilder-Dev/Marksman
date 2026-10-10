@@ -23,8 +23,9 @@ paint), injects meta, Open Graph and structured data, inlines the CSS and loads
 the app bundle after first paint.
 
 The base path is relative (`./`), so `dist/` works from any sub-path.
-`.github/workflows/deploy.yml` publishes to GitHub Pages on every push to
-`main` (enable Pages → "GitHub Actions" in the repo settings).
+`.github/workflows/deploy.yml` publishes to GitHub Pages on every push to the
+repository's default branch (enable Pages → "GitHub Actions" in the repo
+settings).
 
 ## Editing content
 
