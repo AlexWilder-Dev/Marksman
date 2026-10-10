@@ -1,0 +1,395 @@
+/* ------------------------------------------------------------------ */
+/* Today's Menu: a printed card on the green-painted panelling          */
+/* ------------------------------------------------------------------ */
+
+.menu-section {
+  position: relative;
+  padding-block: var(--section-pad);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 30%),
+    var(--green);
+  color: var(--cream);
+}
+
+.menu-section::before {
+  /* Painted panel mouldings. */
+  content: '';
+  position: absolute;
+  inset: clamp(10px, 2vw, 24px);
+  border: 1px solid rgba(243, 234, 216, 0.14);
+  box-shadow: inset 0 0 0 6px var(--green), inset 0 0 0 7px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+.menu-section .section-mark {
+  color: var(--mustard);
+}
+
+.menu-section .section-title {
+  color: var(--cream);
+}
+
+.paper {
+  position: relative;
+  max-width: 920px;
+  margin-inline: auto;
+  padding: clamp(24px, 6vw, 72px) clamp(18px, 6vw, 80px) clamp(28px, 5vw, 56px);
+  background: var(--tx-paper), var(--paper);
+  color: var(--ink);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.25),
+    0 30px 60px -30px rgba(0, 0, 0, 0.6);
+}
+
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: clamp(8px, 1.5vw, 16px);
+  border: 1px solid rgba(166, 54, 31, 0.5);
+  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px rgba(166, 54, 31, 0.3);
+  pointer-events: none;
+}
+
+.paper-head {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.paper-mark {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
+}
+
+.paper-house {
+  font-family: var(--font-label);
+  font-stretch: 85%;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.paper-date {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4.5vw, 2.3rem);
+  line-height: 1.1;
+}
+
+.paper-daily {
+  color: var(--red);
+}
+
+/* Tabs */
+
+.paper-tabs {
+  display: flex;
+  justify-content: center;
+  gap: clamp(0px, 2vw, 18px);
+  margin: clamp(20px, 4vw, 36px) 0 clamp(18px, 3vw, 28px);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.paper-tab {
+  position: relative;
+  min-height: 44px;
+  padding: 8px clamp(5px, 1.5vw, 12px);
+  font-family: var(--font-label);
+  font-stretch: 85%;
+  font-size: clamp(0.84rem, 2.4vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-faint);
+  transition: color 0.2s var(--ease-out);
+}
+
+.paper-tab:hover,
+.paper-tab[aria-selected='true'] {
+  color: var(--ink);
+}
+
+.paper-tab-mark {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -3px;
+  height: 3px;
+  background: var(--red);
+}
+
+.paper-tab-text {
+  position: relative;
+}
+
+.paper-panel:focus-visible {
+  outline-offset: 8px;
+}
+
+/* Panel */
+
+.panel-head {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  margin-bottom: clamp(20px, 4vw, 36px);
+  text-align: center;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.1;
+}
+
+.panel-stamp {
+  display: inline-block;
+  padding: 3px 10px;
+  color: var(--red);
+  border: 1.5px solid var(--red);
+  border-radius: 3px;
+  transform: rotate(-3deg);
+  -webkit-mask-image: var(--tx-stamp);
+  mask-image: var(--tx-stamp);
+}
+
+.panel-price {
+  font-family: var(--font-label);
+  font-stretch: 85%;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel-intro {
+  max-width: 46ch;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.panel-sections {
+  display: grid;
+  gap: clamp(22px, 4vw, 34px);
+}
+
+@media (min-width: 820px) {
+  .panel-sections.is-long {
+    display: block;
+    columns: 2;
+    column-gap: clamp(36px, 5vw, 64px);
+  }
+
+  .panel-sections.is-long .menu-group {
+    break-inside: avoid;
+    margin-bottom: 30px;
+  }
+}
+
+.menu-group-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-family: var(--font-label);
+  font-stretch: 85%;
+  font-weight: 700;
+  font-size: 0.86rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.menu-group-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(166, 54, 31, 0.35);
+}
+
+.menu-group-note {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.86rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-faint);
+}
+
+.menu-items {
+  display: grid;
+  gap: 7px;
+}
+
+.mi {
+  display: grid;
+}
+
+.mi-row {
+  display: flex;
+  align-items: flex-end;
+}
+
+.mi-name {
+  flex: 0 1 auto;
+  font-size: 1.04rem;
+  line-height: 1.4;
+}
+
+.mi-per {
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+.mi-leader {
+  flex: 1 1 24px;
+  min-width: 24px;
+  margin: 0 8px 0.42em;
+  border-bottom: 1.5px dotted rgba(31, 26, 22, 0.45);
+}
+
+.mi-price {
+  flex: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.04rem;
+  font-variant-numeric: lining-nums;
+  line-height: 1.4;
+}
+
+.mi-desc {
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.sig {
+  display: inline-block;
+  width: 0.62em;
+  height: 0.62em;
+  margin-right: 8px;
+  clip-path: var(--oct);
+  background: var(--red);
+  vertical-align: 0.05em;
+}
+
+.menu-group-title .sig {
+  margin-right: 0;
+}
+
+.panel-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.paper-foot {
+  display: grid;
+  gap: 12px;
+  margin-top: clamp(28px, 5vw, 44px);
+  padding-top: 20px;
+  border-top: 1px solid var(--rule-strong);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.paper-legend {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-label);
+  font-stretch: 85%;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.paper-notes {
+  display: grid;
+  gap: 6px;
+}
+
+.menu-pdf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 14px;
+  margin-top: 22px;
+  text-align: center;
+}
+
+.menu-pdf .text-link {
+  color: var(--cream);
+}
+
+.menu-pdf-note {
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--cream-dim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper .mi,
+  .paper .panel-head,
+  .paper .menu-group-title,
+  .paper .panel-cta {
+    opacity: 1 !important;
+    clip-path: none !important;
+  }
+}
+
+/* Printing the page gives just the menu. */
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .skip-link,
+  .topbar,
+  .mobilebar,
+  .hero,
+  .story,
+  .floors,
+  .sigs,
+  .groups,
+  .christmas,
+  .findus,
+  .footer,
+  .menu-section .section-head,
+  .paper-tabs,
+  .menu-pdf {
+    display: none !important;
+  }
+
+  .menu-section {
+    padding: 0;
+    background: none;
+  }
+
+  .menu-section::before {
+    display: none;
+  }
+
+  .paper {
+    box-shadow: none;
+    max-width: none;
+    background: #fff;
+  }
+
+  .paper .mi,
+  .paper .panel-head,
+  .paper .menu-group-title {
+    opacity: 1 !important;
+    clip-path: none !important;
+  }
+}

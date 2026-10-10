@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alexwilder-dev.github.io/Marksman/sitemap.xml

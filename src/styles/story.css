@@ -1,0 +1,344 @@
+/* ------------------------------------------------------------------ */
+/* Fifty Feet: a pencil line across the street plan                    */
+/* ------------------------------------------------------------------ */
+
+.story {
+  position: relative;
+  background: var(--plaster-2);
+  border-top: 1px solid var(--rule-strong);
+}
+
+.story::before {
+  /* Faint surveyor's grid. */
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(31, 26, 22, 0.05) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(0deg, rgba(31, 26, 22, 0.05) 0 1px, transparent 1px 40px);
+}
+
+.story-track {
+  position: relative;
+}
+
+.story-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.story-stage-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--topbar-h) + clamp(16px, 4vh, 48px));
+}
+
+.story-head {
+  margin-bottom: 0;
+}
+
+.story-counter {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0.06em;
+  margin-top: clamp(0px, 1vh, 16px);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(4rem, 19vw, 11rem);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink);
+}
+
+.count-live,
+.count-static {
+  display: inline-block;
+  min-width: 1.2em;
+  text-align: right;
+}
+
+.count-static {
+  display: none;
+}
+
+.count-unit {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.3em;
+  letter-spacing: 0;
+  color: var(--red);
+}
+
+/* Sight-line row */
+
+.sightline {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  overflow: hidden;
+  gap: clamp(6px, 2vw, 24px);
+  margin-top: clamp(14px, 3.5vh, 40px);
+}
+
+.sl-marker {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: clamp(70px, 13vw, 150px);
+  text-align: center;
+}
+
+.minipub {
+  width: 100%;
+  height: auto;
+}
+
+.sl-name {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+
+.sightline.is-hit .sl-to .sl-name {
+  color: var(--red);
+}
+
+.sightline.is-hit .sl-to .minipub {
+  animation: hit 0.7s var(--ease-out);
+}
+
+@keyframes hit {
+  30% {
+    transform: rotate(-3deg) translateY(-2px);
+  }
+  60% {
+    transform: rotate(2deg);
+  }
+}
+
+.sl-track {
+  position: relative;
+  height: clamp(44px, 7vw, 64px);
+  margin-bottom: clamp(30px, 6vw, 56px);
+}
+
+.sl-dash,
+.sl-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+}
+
+.sl-dash {
+  height: 1px;
+  background: repeating-linear-gradient(90deg, rgba(31, 26, 22, 0.35) 0 5px, transparent 5px 10px);
+}
+
+.sl-line {
+  height: 2px;
+  margin-top: -1px;
+  transform-origin: 0 50%;
+  background: var(--red);
+}
+
+.sl-tip {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sl-reticle {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: clamp(28px, 4vw, 40px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  color: var(--red);
+}
+
+.sl-reticle svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Surveyor's tape under the line */
+.sl-scale {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% + 14px);
+  height: 22px;
+  border-top: 1px solid var(--ink);
+  background: repeating-linear-gradient(90deg, rgba(31, 26, 22, 0.5) 0 1px, transparent 1px 2%) 0 0 / 100% 5px no-repeat;
+}
+
+.sl-scale span {
+  position: absolute;
+  top: 8px;
+  transform: translateX(-50%);
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.sl-scale span::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -9px;
+  width: 1px;
+  height: 8px;
+  background: var(--ink);
+}
+
+/* Beats scroll over the stage, each fading through its moment */
+
+.story-beats {
+  position: relative;
+  z-index: 2;
+  margin-top: -100vh;
+  margin-top: -100svh;
+}
+
+.beat {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: calc(var(--bottombar-h) + clamp(28px, 7vh, 88px));
+}
+
+.beat-card {
+  display: grid;
+  gap: 6px;
+  max-width: calc(640px + 2 * var(--gutter));
+  margin-inline: 0;
+}
+
+.beat-year {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 5.5vw, 3rem);
+  line-height: 1;
+  color: var(--red);
+}
+
+.beat-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-faint);
+}
+
+.beat-kicker .oct {
+  color: var(--red);
+}
+
+.beat-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 5vw, 2.8rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.beat-body {
+  max-width: 44ch;
+  color: var(--ink-soft);
+  font-size: clamp(1.02rem, 2.4vw, 1.18rem);
+}
+
+@media (min-width: 900px) {
+  .story-stage-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto 1fr;
+    column-gap: 40px;
+  }
+
+  .story-head {
+    grid-column: 1;
+  }
+
+  .story-counter {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    margin-top: 0;
+  }
+
+  .sightline {
+    grid-column: 1 / -1;
+    margin-top: clamp(24px, 6vh, 64px);
+  }
+
+  .beat-card {
+    grid-template-columns: minmax(180px, 0.6fr) 1fr;
+    column-gap: 40px;
+    max-width: calc(980px + 2 * var(--gutter));
+    margin-left: max(0px, calc((100vw - var(--max)) / 2 - var(--gutter)));
+  }
+
+  .beat-year {
+    grid-row: 1 / span 3;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    text-align: right;
+  }
+}
+
+/* Reduced motion: a plain, readable timeline. */
+@media (prefers-reduced-motion: reduce) {
+  .story-stage {
+    position: relative;
+    height: auto;
+    overflow: visible;
+    padding-bottom: 48px;
+  }
+
+  .story-beats {
+    margin-top: 0;
+    display: grid;
+    gap: 48px;
+    padding-bottom: var(--section-pad);
+  }
+
+  .beat {
+    min-height: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .beat-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .sl-line {
+    transform: none !important;
+  }
+
+  .sl-tip {
+    transform: translateX(100%) !important;
+  }
+
+  .count-live {
+    display: none;
+  }
+
+  .count-static {
+    display: inline-block;
+  }
+}
